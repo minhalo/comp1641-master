@@ -86,11 +86,6 @@ class PostController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-
-
-
-
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -99,44 +94,23 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $post = Post::find($id);
-        if($post) {
-            $validator = Validator::make($request->all(), [
-                'name' => ['required', 'string', 'min:6', 'max:30'],
-                'description' => ['min:6','max:255'],
-                'slug' => ['string'],
-                'content' => ['required', 'min:1'],
-                'status' => ['required', 'string',  Rule::in([StatusConst::PUBLISHED, StatusConst::UNPUBLISHED , StatusConst::DRAFT])],
-                'image' => ['required'],
-                'views' => ['integer'],
-                'start_date' => ['date'],
-                'end_date' => ['date'],
-                'category_id' => ['integer'],
-                'user_id' => ['integer']
-            ]);
-            if ($validator->fails()) {
-                return response()->json(['errors' => $validator->errors()], 422);
-            }
-    
-            Post::update(
-                [
-                    'name' => $request->name,
-                    'description' => $request->description,
-                    'status' => $request->status,
-                    'is_featured' => false,
-                    'slug' => $request->name,
-                    'content' => $request->content,
-                    'image' => $request->image,
-                    'views' => $request->views,
-                    'start_date' => $request->start_date,
-                    'end_date' => $request->end_date,
-                    'category_id' => $request->category_id,
-                    'user_id' => $request->user_id
-                ]
-            );
-            return response()->json(['message' => 'Post update successfully'], 200);
+        $validator = Validator::make($request->all(), [
+            'start_date' => ['required', 'date'],
+            'end_date' => ['required', 'date'],
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
         }
-        return response()->json(['message' => 'Post not found'], 404);
+
+        $post = Post::findOrFail($id);
+
+        $post->start_date = $request->start_date;
+        $post->end_date = $request->end_date;
+        $post->save();
+
+        
+        return response()->json(['message' => 'Post update successfully'], 404);
     }
 
     /**

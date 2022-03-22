@@ -45,7 +45,7 @@ class CommentController extends Controller
         // 'post_id',
         // 'user_id'
         $validator = Validator::make($request->all(), [
-            'content' => ['required', 'string', 'min:6', 'max:30'],
+            'content' => ['required', 'string', 'min:1', 'max:255'],
             'like' => ['integer'],
             'dislike' => ['integer'],
             'post_id' => ['integer'],
