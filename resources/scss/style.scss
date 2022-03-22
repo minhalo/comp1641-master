@@ -1,0 +1,34 @@
+@import "variables";
+
+/* ######## FONT ######## */
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600&display=swap');
+
+/* ######## BOOTSTRAP ######## */
+@import "~bootstrap/scss/bootstrap";
+
+/*  ######## MAIN-STYLES ######## */
+@import "custom/_components-col";
+@import "custom/_forms";
+@import "custom/_fonts";
+@import "custom/_styles";
+@import "custom/_labels";
+@import "custom/_tabs-menu";
+
+/* ######## LAYOUT-STYLES ######## */
+@import "layouts/_header";
+@import "layouts/_footer";
+@import "layouts/_horizontal-menu";
+
+/* ######## UTILITIES-STYLES ######## */
+
+@import "utilities/_alignments";
+@import "utilities/_background";
+@import "utilities/_border";
+@import "utilities/_display";
+@import "utilities/_float-elements";
+@import "utilities/_height";
+@import "utilities/_margin";
+@import "utilities/_padding";
+@import "utilities/_position";
+@import "utilities/_typography";
+@import "utilities/_width";
